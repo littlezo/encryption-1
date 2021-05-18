@@ -10,6 +10,8 @@ declare(strict_types=1);
  */
 namespace Friendsofhyperf\Encryption\Listener;
 
+use Friendsofhyperf\Encryption\Contract\Encrypter;
+use Friendsofhyperf\Encryption\Contract\StringEncrypter;
 use Friendsofhyperf\Encryption\KeyParser;
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Event\Contract\ListenerInterface;
@@ -29,10 +31,16 @@ class BootEncryptionListener implements ListenerInterface
      */
     private $parser;
 
+    /**
+     * @var \Hyperf\Contract\ContainerInterface
+     */
+    private $container;
+
     public function __construct(ContainerInterface $container)
     {
         $this->config = $container->get(ConfigInterface::class);
         $this->parser = $container->get(KeyParser::class);
+        $this->container = $container;
     }
 
     public function listen(): array
@@ -45,6 +53,13 @@ class BootEncryptionListener implements ListenerInterface
     public function process(object $event)
     {
         $this->registerOpisSecurityKey();
+        $this->registerAlias();
+    }
+
+    protected function registerAlias()
+    {
+        $this->container->set(Encrypter::class, $this->container->get(\Friendsofhyperf\Encryption\Encrypter::class));
+        $this->container->set(StringEncrypter::class, $this->container->get(\Friendsofhyperf\Encryption\Encrypter::class));
     }
 
     /**
