@@ -45,7 +45,7 @@
     },
     "extra": {
         "hyperf": {
-            "config": "Hyperf\\Encryption\\ConfigProvider"
+            "config": "Friendsofhyperf\\Encryption\\ConfigProvider"
         }
     },
     "scripts": {

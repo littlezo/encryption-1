@@ -19,7 +19,7 @@ class EncrypterFactory
     {
         /** @var array $config */
         $config = $container->get(ConfigInterface::class)->get('encryption', []);
-        /** @var KeyParser $keyParser */
+        /** @var KeyParser $parser */
         $parser = $container->get(KeyParser::class);
 
         return new Encrypter($parser->parseKey($config), $config['cipher']);
