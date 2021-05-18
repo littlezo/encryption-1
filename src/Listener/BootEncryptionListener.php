@@ -10,8 +10,9 @@ declare(strict_types=1);
  */
 namespace Friendsofhyperf\Encryption\Listener;
 
-use Friendsofhyperf\Encryption\Contract\Encrypter;
+use Friendsofhyperf\Encryption\Contract\Encrypter as EncrypterInterface;
 use Friendsofhyperf\Encryption\Contract\StringEncrypter;
+use Friendsofhyperf\Encryption\Encrypter;
 use Friendsofhyperf\Encryption\KeyParser;
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Event\Annotation\Listener;
@@ -62,8 +63,8 @@ class BootEncryptionListener implements ListenerInterface
 
     protected function registerAlias()
     {
-        $this->container->set(Encrypter::class, $this->container->get(\Friendsofhyperf\Encryption\Encrypter::class));
-        $this->container->set(StringEncrypter::class, $this->container->get(\Friendsofhyperf\Encryption\Encrypter::class));
+        $this->container->set(EncrypterInterface::class, $this->container->get(Encrypter::class));
+        $this->container->set(StringEncrypter::class, $this->container->get(Encrypter::class));
     }
 
     /**
