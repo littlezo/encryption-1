@@ -20,6 +20,8 @@ class ConfigProvider
         return [
             'dependencies' => [
                 Encrypter::class => EncrypterFactory::class,
+                Contract\Encrypter::class => EncrypterFactory::class,
+                Contract\StringEncrypter::class => EncrypterFactory::class,
             ],
             'annotations' => [
                 'scan' => [
