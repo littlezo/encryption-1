@@ -19,7 +19,7 @@ if (! function_exists('decrypt')) {
     function decrypt($value, $unserialize = true)
     {
         return \Hyperf\Utils\ApplicationContext::getContainer()
-            ->get(\Friendsofhyperf\Encryption\Contract\Encrypter::class)
+            ->get(\Friendsofhyperf\Encryption\Encrypter::class)
             ->decrypt($value, $unserialize);
     }
 }
@@ -35,7 +35,7 @@ if (! function_exists('encrypt')) {
     function encrypt($value, $serialize = true)
     {
         return \Hyperf\Utils\ApplicationContext::getContainer()
-            ->get(\Friendsofhyperf\Encryption\Contract\Encrypter::class)
+            ->get(\Friendsofhyperf\Encryption\Encrypter::class)
             ->encrypt($value, $serialize);
     }
 }

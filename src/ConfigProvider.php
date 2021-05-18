@@ -10,8 +10,6 @@ declare(strict_types=1);
  */
 namespace Friendsofhyperf\Encryption;
 
-use Friendsofhyperf\Encryption\Contract\Encrypter as EncrypterInterface;
-
 class ConfigProvider
 {
     public function __invoke(): array
@@ -21,7 +19,7 @@ class ConfigProvider
 
         return [
             'dependencies' => [
-                EncrypterInterface::class => EncrypterFactory::class,
+                Encrypter::class => EncrypterFactory::class,
             ],
             'annotations' => [
                 'scan' => [
