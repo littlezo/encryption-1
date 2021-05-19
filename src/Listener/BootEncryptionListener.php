@@ -10,9 +10,6 @@ declare(strict_types=1);
  */
 namespace Friendsofhyperf\Encryption\Listener;
 
-use Friendsofhyperf\Encryption\Contract\Encrypter as EncrypterInterface;
-use Friendsofhyperf\Encryption\Contract\StringEncrypter;
-use Friendsofhyperf\Encryption\Encrypter;
 use Friendsofhyperf\Encryption\KeyParser;
 use Hyperf\Contract\ConfigInterface;
 use Hyperf\Event\Annotation\Listener;
@@ -58,13 +55,6 @@ class BootEncryptionListener implements ListenerInterface
     public function process(object $event)
     {
         $this->registerOpisSecurityKey();
-        $this->registerAlias();
-    }
-
-    protected function registerAlias()
-    {
-        $this->container->set(EncrypterInterface::class, $this->container->get(Encrypter::class));
-        $this->container->set(StringEncrypter::class, $this->container->get(Encrypter::class));
     }
 
     /**
