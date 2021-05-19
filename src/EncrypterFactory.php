@@ -25,7 +25,8 @@ class EncrypterFactory
         $parser = $container->get(KeyParser::class);
 
         return tap(new Encrypter($parser->parseKey($config), $config['cipher']), function ($instance) use ($container) {
-            /* @var \Hyperf\Contract\ContainerInterface $container */
+            /** @var \Hyperf\Contract\ContainerInterface $container */
+            $container = $container;
             $container->set(EncrypterContract::class, $instance);
             $container->set(StringEncrypter::class, $instance);
         });
