@@ -10,6 +10,8 @@ declare(strict_types=1);
  */
 namespace Friendsofhyperf\Encryption;
 
+use Friendsofhyperf\Encryption\Contract\Encrypter as EncrypterContract;
+use Friendsofhyperf\Encryption\Contract\StringEncrypter;
 use Hyperf\Contract\ConfigInterface;
 use Psr\Container\ContainerInterface;
 
@@ -24,7 +26,7 @@ class EncrypterFactory
 
         return tap(new Encrypter($parser->parseKey($config), $config['cipher']), function ($instance) use ($container) {
             /* @var \Hyperf\Contract\ContainerInterface $container */
-            $container->set(EncrypterInterface::class, $instance);
+            $container->set(EncrypterContract::class, $instance);
             $container->set(StringEncrypter::class, $instance);
         });
     }
