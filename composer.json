@@ -35,9 +35,9 @@
         "hyperf/framework": "^2.0"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.0",
         "hyperf/testing": "^2.0",
         "phpstan/phpstan": "^0.12",
-        "friendsofphp/php-cs-fixer": "^2.14|^3.0",
         "opis/closure": "^3.6"
     },
     "config": {
