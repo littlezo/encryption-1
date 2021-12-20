@@ -104,35 +104,30 @@ class Encrypter implements EncrypterContract, StringEncrypter
     public function encrypt($value, $serialize = true)
     {
         $iv = random_bytes(openssl_cipher_iv_length(strtolower($this->cipher)));
-        $tag = '';
-        $value = self::$supportedCiphers[strtolower($this->cipher)]['aead']
-            ? \openssl_encrypt(
-                $serialize ? serialize($value) : $value,
-                strtolower($this->cipher),
-                $this->key,
-                0,
-                $iv,
-                $tag
-            )
-            : \openssl_encrypt(
-                $serialize ? serialize($value) : $value,
-                strtolower($this->cipher),
-                $this->key,
-                0,
-                $iv
-            );
+        $value = \openssl_encrypt(
+            $serialize ? serialize($value) : $value,
+            strtolower($this->cipher),
+            $this->key,
+            0,
+            $iv,
+            $tag
+        );
+
         if ($value === false) {
             throw new EncryptException('Could not encrypt the data.');
         }
+
         $iv = base64_encode($iv);
         $tag = base64_encode($tag);
         $mac = self::$supportedCiphers[strtolower($this->cipher)]['aead']
             ? '' // For AEAD-algoritms, the tag / MAC is returned by openssl_encrypt...
             : $this->hash($iv, $value);
         $json = json_encode(compact('iv', 'value', 'mac', 'tag'), JSON_UNESCAPED_SLASHES);
+
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new EncryptException('Could not encrypt the data.');
         }
+
         return base64_encode($json);
     }
 
