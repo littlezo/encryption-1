@@ -18,4 +18,8 @@
     "php-cs-fixer.autoFixBySemicolon": false,
     "php-cs-fixer.formatHtml": true,
     "php-cs-fixer.documentFormattingProvider": true,
+    "cSpell.words": [
+        "Encrypter",
+        "unserialization"
+    ],
 }
