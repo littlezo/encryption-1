@@ -26,20 +26,11 @@ use Psr\Container\ContainerInterface;
  */
 class BootEncryptionListener implements ListenerInterface
 {
-    /**
-     * @var ConfigInterface
-     */
-    private $config;
+    private \Hyperf\Contract\ConfigInterface $config;
 
-    /**
-     * @var KeyParser
-     */
-    private $parser;
+    private \Friendsofhyperf\Encryption\KeyParser $parser;
 
-    /**
-     * @var \Hyperf\Contract\ContainerInterface
-     */
-    private $container;
+    private \Hyperf\Contract\ContainerInterface $container;
 
     public function __construct(ContainerInterface $container)
     {
