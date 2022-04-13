@@ -46,7 +46,7 @@ class BootEncryptionListener implements ListenerInterface
         ];
     }
 
-    public function process(object $event)
+    public function process(object $event): void
     {
         $this->registerOpisSecurityKey();
         $this->registerAlias();
